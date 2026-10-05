@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "syncuze"
+version = "1.0.0"
+description = "Personal assistant memory service backend using FastAPI"
+authors = ["SyncUze Team"]
+packages = [
+    { include = "app" },
+    { include = "syncuze" }
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.100.0"
+uvicorn = "^0.22.0"
+sqlalchemy = "^2.0.0"
+pydantic = "^2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

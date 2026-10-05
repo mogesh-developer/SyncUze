@@ -1,11 +1,11 @@
-# 🧠 RaavOne Memory Engine `v3.0`
+# 🧠 SyncUze Engine `v3.0`
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mogesh-developer/RaavOne-Memory/main/assets/banner.png" alt="RaavOne Memory Engine Header" width="100%" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);" onerror="this.style.display='none';">
+  <img src="https://raw.githubusercontent.com/mogesh-developer/SyncUze/main/assets/banner.png" alt="SyncUze Engine Header" width="100%" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);" onerror="this.style.display='none';">
 </p>
 
 <p align="center">
-  <a href="https://github.com/mogesh-developer/RaavOne-Memory"><img src="https://img.shields.io/badge/Release-v3.0.0-6E3CBC?style=for-the-badge&logo=github&logoColor=white" alt="Version"></a>
+  <a href="https://github.com/mogesh-developer/SyncUze"><img src="https://img.shields.io/badge/Release-v3.0.0-6E3CBC?style=for-the-badge&logo=github&logoColor=white" alt="Version"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"></a>
   <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.100%2B-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"></a>
   <a href="https://www.trychroma.com/"><img src="https://img.shields.io/badge/ChromaDB-Vector--Store-FF6F00?style=for-the-badge&logo=chromadb&logoColor=white" alt="ChromaDB"></a>
@@ -50,7 +50,7 @@
 graph TD
     Client([AI Client / Frontend]) -->|Query / Chat| SDK[Memory SDK Wrapper]
     
-    subgraph "RaavOne Memory Engine Backend"
+    subgraph "SyncUze Engine Backend"
         SDK -->|Route API Requests| Router[FastAPI Router]
         Router -->|Chat Orchestration| ChatService[Context Builder & Chat Service]
         Router -->|Analytics query| AnalyticsService[Analytics Engine]
@@ -100,8 +100,8 @@ sequenceDiagram
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/mogesh-developer/RaavOne-Memory.git
-cd RaavOne-Memory
+git clone https://github.com/mogesh-developer/SyncUze.git
+cd SyncUze
 
 # 2. Setup a virtual environment
 python -m venv venv
@@ -121,25 +121,28 @@ uvicorn app.main:app --reload
 
 ## ⚡ SDK Quick Start
 
-Integrate RaavOne Memory directly into your Python scripts:
+Integrate SyncUze directly into your Python scripts:
 
 ```python
-from raavone_core import Memory
+from syncuze import MemoryClient, SyncUzeMemory
 
-# 1. Start a chat with long-term memory context
-response = Memory.chat(user_id="mogesh", message="I want to learn Go language.")
+# 1. Initialize SyncUze client
+client = SyncUzeMemory(mode="local")
+
+# 2. Start a chat with long-term memory context
+response = client.chat(user_id="mogesh", message="I want to learn Go language.")
 print("AI Response:", response)
 
-# 2. Retrieve user persona profile
-profile = Memory.get_profile(user_id="mogesh")
+# 3. Retrieve user persona profile
+profile = client.get_profile(user_id="mogesh")
 print("User Profile:\n", profile)
 
-# 3. Retrieve chronological milestones
-timeline = Memory.get_timeline(user_id="mogesh")
+# 4. Retrieve chronological milestones
+timeline = client.get_timeline(user_id="mogesh")
 print("User Timeline:\n", timeline)
 
-# 4. View memory statistics and health
-analytics = Memory.get_analytics(user_id="mogesh")
+# 5. View memory statistics and health
+analytics = client.get_analytics(user_id="mogesh")
 print("Analytics Stats:", analytics)
 ```
 
@@ -170,7 +173,7 @@ curl -X 'POST' 'http://localhost:8000/memory/cleanup?days=30&importance_limit=3'
 ## 📂 Folder Structure
 
 ```
-RaavOne-Memory/
+SyncUze/
 │
 ├── app/
 │   ├── models/           # SQLite schemas (Memory, Message, Session)
@@ -181,7 +184,7 @@ RaavOne-Memory/
 │   ├── database.py       # DB connection pool setup
 │   └── main.py           # Application root entry point
 │
-├── raavone_core/         # SDK wrapper classes (Memory)
+├── syncuze/              # SDK wrapper package (MemoryClient, LocalMemoryClient, SyncUzeMemory)
 │
 ├── tests/                # Comprehensive test suites
 │   ├── conftest.py
